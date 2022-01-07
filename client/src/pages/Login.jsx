@@ -1,4 +1,4 @@
-import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import React,{useState} from 'react'
 import { Navigate } from "react-router-dom"
 import { authentication } from '../utils/init-firebase';
@@ -7,6 +7,9 @@ import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import styling from '../styles/pagestyles/Login'
 import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
+
+
+
 const Login = () => {
 
 
@@ -19,7 +22,7 @@ const Login = () => {
     const submitlogin = async(event) => {
         event.preventDefault();
         try {
-            const user= await signInWithEmailAndPassword(authentication,email,pass)
+            await signInWithEmailAndPassword(authentication,email,pass)
 
         } catch (error) {
             alert("User authetication failed!")
@@ -40,6 +43,7 @@ const Login = () => {
     return (
         <>
         {checkValidation()}
+
         <Box height="50%" className={classes.box} display="flex" flexDirection="column" width="50vw" justifyContent="center" alignItems="center" boxShadow={20} borderRadius={16}>
             <AccountCircleTwoToneIcon className={classes.icon}/>
             <form onSubmit={submitlogin} className={classes.form}>
@@ -49,7 +53,6 @@ const Login = () => {
                 <br/>
                 <Button variant="contained" color="primary" type='submit' size="large" style={{backgroundColor:"#6E3CBC"}}>Login</Button>
             </form>
-            <h4>{user?.email}</h4>
         </Box>
         </>
     )

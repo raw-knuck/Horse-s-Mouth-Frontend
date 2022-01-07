@@ -1,5 +1,4 @@
 import { makeStyles } from "@material-ui/styles";
-import theme from '../themes/Main'
 
 const useStyles=makeStyles((theme)=>({
     root:{
@@ -10,7 +9,8 @@ const useStyles=makeStyles((theme)=>({
     box:{
         backgroundColor:theme.root.primary.light,
         [theme.breakpoints.down('sm')]: {
-            width:'100vw'
+            width:'100vw',
+            height: '60vh'
           },
     },
     icon:{

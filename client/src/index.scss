@@ -12,6 +12,7 @@ body {
   align-items: center;
   min-width: 100vw;
   min-height: 100vh;
+  overflow: hidden;
 }
 #root{
   min-width: 100%;
@@ -20,6 +21,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
