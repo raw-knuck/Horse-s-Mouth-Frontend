@@ -12,7 +12,7 @@ import { ThemeProvider } from '@material-ui/styles';
 function App() {
   return (
     <>
-    <ThemeProvider>
+    <ThemeProvider theme={theme}>
       <Routes>
         <Route exact path="/" element={<Home/>}/>
         <Route exact path="/login" element={<Login/>}/>

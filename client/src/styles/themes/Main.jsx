@@ -1,12 +1,13 @@
 import { createTheme } from "@material-ui/core";
-import { purple } from "@material-ui/core/colors";
 
 const maintheme= createTheme({
     root:{
         primary:{
-            backgroundColor:purple[500]
+            main:"#6E3CBC",
+            light:"#FFFFFF"
         }
-    }
+    },
+    spacing: 4,
     
 })
 

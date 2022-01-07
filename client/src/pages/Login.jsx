@@ -1,8 +1,12 @@
 import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import React,{useState} from 'react'
-import { auth } from '../utils/init-firebase';
-
-
+import { Navigate } from "react-router-dom"
+import { authentication } from '../utils/init-firebase';
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import Box from '@material-ui/core/Box'
+import styling from '../styles/pagestyles/Login'
+import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
 const Login = () => {
 
 
@@ -11,35 +15,42 @@ const Login = () => {
     const [pass, setpass] = useState("")
     const [user, setuser] = useState({})
 
-
     //submitting form
     const submitlogin = async(event) => {
         event.preventDefault();
         try {
-            const user= await signInWithEmailAndPassword(auth,email,pass)
+            const user= await signInWithEmailAndPassword(authentication,email,pass)
+
         } catch (error) {
-            console.log(error);
+            alert("User authetication failed!")
         }
     }
     
-    onAuthStateChanged(auth,(currentUser)=>{
+    onAuthStateChanged(authentication,(currentUser)=>{
         setuser(currentUser)
     })
 
-    const signing_out = async() =>{
-        await signOut(auth)
+    const checkValidation = () =>{
+        if(user?.email)
+        {
+            return <Navigate to='/'/>;
+        }
     }
+    const classes=styling();
     return (
         <>
-            <form onSubmit={submitlogin}>
-                <input type="text" placeholder='email address' name='email' onChange={(event)=>{setemail(event.target.value)}} value={email}/>
-                <br />
-                <input type="text" placeholder='password' name='password' onChange={(event)=>{setpass(event.target.value)}} value={pass}/>
-                <br />
-                <button type="submit">Login</button>
+        {checkValidation()}
+        <Box height="50%" className={classes.box} display="flex" flexDirection="column" width="50vw" justifyContent="center" alignItems="center" boxShadow={20} borderRadius={16}>
+            <AccountCircleTwoToneIcon className={classes.icon}/>
+            <form onSubmit={submitlogin} className={classes.form}>
+                <TextField name='email' onChange={(event)=>{setemail(event.target.value)}} value={email} label="Email address" variant="outlined" required={true}/>
+                <br/>
+                <TextField name='password' onChange={(event)=>{setpass(event.target.value)}} value={pass} label="Password" variant="outlined" required={true} type={"password"}/>
+                <br/>
+                <Button variant="contained" color="primary" type='submit' size="large" style={{backgroundColor:"#6E3CBC"}}>Login</Button>
             </form>
-            <h4>{user?user.email:""}</h4>
-            <button onClick={signing_out}>Sign Out</button>
+            <h4>{user?.email}</h4>
+        </Box>
         </>
     )
 }
