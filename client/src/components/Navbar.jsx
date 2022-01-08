@@ -81,7 +81,7 @@ const Navbar = () => {
             style={{marginTop:"40px",padding:"30px 30px"}}
           >
             <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem onClick={signing_out}>Logout</MenuItem>
           </Menu>
       </AppBar>
     </>
