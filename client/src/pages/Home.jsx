@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import React, { useContext } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import AppBar from "../components/Navbar";
 // import Firebasestate from '../contexts/firebaseauth/firebasestate';
@@ -23,7 +23,7 @@ const Home = () => {
       return;
     }
   });
-  const [token, settoken] = useState("");
+  // const [token, settoken] = useState("");
   const val = useContext(firebasetoken);
   console.log(val);
   // settoken(val)
