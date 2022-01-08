@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@material-ui/core";
-import styling from "../styles/componentstyle/LeftNav";
+import styling from "../styles/componentstyle/Dashboard";
 
 const LeftNav = () => {
   //AppBar states and functions
@@ -8,10 +8,9 @@ const LeftNav = () => {
   return (
     <>
       <Box 
-      className={classes.leftbar}
-      width="20vw"
-      height="90vh"
-      >
+      className={classes.contain}
+      width="80vw"
+      height="90vh">
 
       </Box>
     </>
