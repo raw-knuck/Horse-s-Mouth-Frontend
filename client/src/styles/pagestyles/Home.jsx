@@ -1,12 +1,12 @@
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles=makeStyles((theme)=>({
-    leftbar:{
-        backgroundColor:theme.root.primary.main,
+    box:{
         [theme.breakpoints.down('sm')]: {
-            display:"none"
-        },
-    },
+            flexDirection:"column",
+            overflow:"scroll !important"
+          }
+    }
 }))
 
 export default useStyles

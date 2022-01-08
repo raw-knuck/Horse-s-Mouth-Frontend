@@ -5,7 +5,6 @@ import { signOut } from "firebase/auth";
 
 //material ui components
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
@@ -15,12 +14,14 @@ import Menu from "@material-ui/core/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import MoreIcon from "@material-ui/icons/MoreVert";
+import MenuIcon from '@material-ui/icons/Menu';
+import { Box } from '@material-ui/core';
 
 const Navbar = () => {
   
   //states
   const [user, setuser] = useState({})
+  const [open, setopen] = useState(false)
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -31,6 +32,16 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
+  const showmenu = () =>{
+    if(open)
+    {
+    setopen(false);
+    }
+    else
+    {
+    setopen(true);
+    }
+  }
 
   //signout functionality calling the signout of firebase and setting user to that new json
   const signing_out = async () => {
@@ -43,6 +54,9 @@ const Navbar = () => {
   return(
     <>
       <AppBar position='static' width="100vw" className={classes.bar}>
+      <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <MenuIcon onClick={showmenu}/>
+          </IconButton>
           <Typography variant="h6" className={classes.title}>
             Admin Panel
           </Typography>
@@ -84,6 +98,8 @@ const Navbar = () => {
             <MenuItem onClick={signing_out}>Logout</MenuItem>
           </Menu>
       </AppBar>
+      {(open)?<Box width="100vw" height="30vh" display="flex">
+      </Box>:null}
     </>
   )
 }

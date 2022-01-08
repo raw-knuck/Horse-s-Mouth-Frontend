@@ -8,7 +8,7 @@ import { authentication } from "../utils/init-firebase";
 
 //all styling imports
 import Box from "@material-ui/core/Box";
-import styling from "../styles/componentstyle/Navbar";
+import styling from "../styles/pagestyles/Home";
 
 const Home = () => {
   //all variables
