@@ -97,7 +97,7 @@ const Navbar = () => {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={signing_out}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -106,7 +106,7 @@ const Navbar = () => {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p>Sign Out</p>
       </MenuItem>
     </Menu>
   )

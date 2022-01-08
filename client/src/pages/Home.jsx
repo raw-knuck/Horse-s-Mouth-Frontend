@@ -1,33 +1,27 @@
-import React, { useContext } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import React from "react";
+import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import AppBar from "../components/Navbar";
-// import Firebasestate from '../contexts/firebaseauth/firebasestate';
 import firebasetoken from "../contexts/firebaseauth/firebasetoken";
+import { authentication } from "../utils/init-firebase";
 
 //all styling imports
 import Box from "@material-ui/core/Box";
 import styling from "../styles/pagestyles/Home";
 
 const Home = () => {
-
   //all variables
-  const auth = getAuth();
   const history = useNavigate();
 
   //function that gets called when any change on user happens by firebase
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(authentication,(user) => {
     if (!user) {
-      return history("/login");
+      history("/login");
+      return null;
     } else {
-      return;
-    }
-  });
-  // const [token, settoken] = useState("");
-  const val = useContext(firebasetoken);
-  console.log(val);
-  // settoken(val)
-
+      console.log(user)
+  }
+  })
   //AppBar states and functions
   const classes = styling();
   return (
@@ -45,6 +39,7 @@ const Home = () => {
       {/* <Firebasestate token={user.accessToken}/> */}
       {/* {user ? <button onClick={signing_out}>Sign Out</button> : null}
       <h4>{token}</h4> */}
+
     </>
   );
 };

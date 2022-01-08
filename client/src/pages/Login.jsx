@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import styling from '../styles/pagestyles/Login'
 import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
-
+import Alert from '@material-ui/lab/Alert';
 
 
 const Login = () => {
@@ -16,6 +16,7 @@ const Login = () => {
     //states
     const [email, setemail] = useState("")
     const [pass, setpass] = useState("")
+    const [err, seterr] = useState(false)
     const [user, setuser] = useState({})
 
     //submitting form
@@ -25,7 +26,7 @@ const Login = () => {
             await signInWithEmailAndPassword(authentication,email,pass)
 
         } catch (error) {
-            alert("User authetication failed!")
+            seterr(true)
         }
     }
     
@@ -47,12 +48,13 @@ const Login = () => {
         <Box height="50%" className={classes.box} display="flex" flexDirection="column" width="50vw" justifyContent="center" alignItems="center" boxShadow={20} borderRadius={16}>
             <AccountCircleTwoToneIcon className={classes.icon}/>
             <form onSubmit={submitlogin} className={classes.form}>
-                <TextField name='email' onChange={(event)=>{setemail(event.target.value)}} value={email} label="Email address" variant="outlined" required={true}/>
+                <TextField name='email' error={(err)?true:false} onChange={(event)=>{setemail(event.target.value)}} value={email} label="Email address" variant="outlined" required={true}/>
                 <br/>
-                <TextField name='password' onChange={(event)=>{setpass(event.target.value)}} value={pass} label="Password" variant="outlined" required={true} type={"password"}/>
+                <TextField name='password' error={(err)?true:false} onChange={(event)=>{setpass(event.target.value)}} value={pass} label="Password" variant="outlined" required={true} type={"password"}/>
                 <br/>
                 <Button variant="contained" color="primary" type='submit' size="large" style={{backgroundColor:"#6E3CBC"}}>Login</Button>
             </form>
+            {(err)?<Alert severity="error">Please check your email address or password!</Alert>:null}
         </Box>
         </>
     )
