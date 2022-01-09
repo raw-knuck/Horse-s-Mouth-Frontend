@@ -23,8 +23,9 @@ const Login = () => {
     const submitlogin = async(event) => {
         event.preventDefault();
         try {
-            await signInWithEmailAndPassword(authentication,email,pass)
-
+            const val=await signInWithEmailAndPassword(authentication,email,pass)
+            localStorage.setItem("user",val.accessToken);
+            // console.log(val.accessToken);
         } catch (error) {
             seterr(true)
         }

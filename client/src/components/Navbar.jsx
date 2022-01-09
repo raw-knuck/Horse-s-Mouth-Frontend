@@ -16,6 +16,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MenuIcon from '@material-ui/icons/Menu';
 import { Box } from '@material-ui/core';
+import { LocalHospitalTwoTone } from '@material-ui/icons';
 
 const Navbar = () => {
   
@@ -47,16 +48,15 @@ const Navbar = () => {
   const signing_out = async () => {
     console.log("called the function");
     setuser(await signOut(authentication));
-    console.log(user);
   };
   const classes = styling();
 
   return(
     <>
       <AppBar position='static' width="100vw" className={classes.bar}>
-      <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+      <IconButton edge="start" color="inherit" aria-label="menu" className={classes.menuicon}>
             <MenuIcon onClick={showmenu}/>
-          </IconButton>
+      </IconButton>
           <Typography variant="h6" className={classes.title}>
             Admin Panel
           </Typography>

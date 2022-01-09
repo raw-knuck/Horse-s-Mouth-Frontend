@@ -20,7 +20,8 @@ const Home = () => {
       history("/login");
       return null;
     } else {
-      // console.log(user)
+      localStorage.setItem("token",user.accessToken);
+      // console.log(user.accessToken);
   }
   })
   //AppBar states and functions

@@ -21,19 +21,12 @@ const useStyles=makeStyles((theme)=>({
         [theme.breakpoints.down('sm')]: {
             overflow:"scroll"
         },
-      },
-    box:{
-        display:"flex",
-        flexDirection:"column",
+    },
+    item:{
+        width:"74vw",
+        height:"14vh",
+        backgroundColor:theme.root.primary.main,
         borderRadius: "10px",
-        width:"32vw",
-        height:"32vh",
-        justifyContent:"center",
-        alignItems:"center",
-        '& .MuiSvgIcon-root':{
-            fontSize:"6rem",
-            color:"#FFFFFF"
-        }
     }
 }))
 
