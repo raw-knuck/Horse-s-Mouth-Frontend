@@ -18,7 +18,7 @@ const useStyles=makeStyles((theme)=>({
     title:
     {
       color:theme.root.primary.light,
-      margin:"0px 40px 0px 0px !important",
+      margin:"0px 60px 0px 0px !important",
       [theme.breakpoints.down('sm')]: {
         margin:"0px 10px 0px 0px !important"
       },
@@ -54,9 +54,9 @@ const useStyles=makeStyles((theme)=>({
       },
     },
     menuicon:{
-      display:"none",
+      display:"none !important",
       [theme.breakpoints.down('sm')]: {
-        display:"flex"
+        display:"flex !important"
       },
     }
 }))

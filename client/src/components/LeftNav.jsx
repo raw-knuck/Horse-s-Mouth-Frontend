@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, IconButton, Typography } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import styling from "../styles/componentstyle/LeftNav";
 import { Home } from "@material-ui/icons";
 import MonetizationOnSharpIcon from '@material-ui/icons/MonetizationOnSharp';
@@ -22,6 +22,9 @@ const LeftNav = () => {
   const sendpay = () =>{
     history('/payment');
   }
+  const sendmentor = () =>{
+    history('/mentor');
+  }
   return (
     <>
       <Box 
@@ -38,7 +41,7 @@ const LeftNav = () => {
         <MonetizationOnSharpIcon className={classes.icon}/>
         <Typography className={classes.navtext}>Payments</Typography>
       </div>
-      <div className={classes.navigation}>
+      <div className={classes.navigation} onClick={sendmentor}>
         <AccountBoxSharpIcon className={classes.icon}/>
         <Typography className={classes.navtext}>Mentors</Typography>
       </div>

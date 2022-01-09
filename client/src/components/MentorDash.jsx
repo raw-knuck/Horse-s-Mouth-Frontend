@@ -1,44 +1,26 @@
 import { Box, IconButton, Typography } from '@material-ui/core';
-import React from 'react'
-import styling from '../styles/componentstyle/PaymentDash'
-import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
+import React, { useState } from 'react'
+import styling from '../styles/componentstyle/MentorDash'
+import MoneyOffIcon from '@material-ui/icons/MoneyOff';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 const PaymentDash = () => {
     const classes=styling();
+
+    const [opentext, setopentext] = useState(false);
     let data=[
         {
-            name:"Subhash",
-            cost:"200"
-        },
-        {
-            name:"Subhash",
-            cost:"200"
-        },
-        {
-            name:"Subhash",
-            cost:"200"
-        },
-        {
-            name:"Subhash",
-            cost:"200"
-        },
-        {
-            name:"Subhash",
-            cost:"200"
-        },
-        {
-            name:"Subhash",
-            cost:"200"
-        },
-        {
-            name:"Subhash",
-            cost:"200"
-        },
-        {
-            name:"Subhash",
+            id:1,
+            name:"Mentor1",
             cost:"200"
         },
     ]
+
+    const penalise= (id) =>{
+        console.log(id);
+        (opentext)?
+        setopentext(false):setopentext(true);
+    }
     return (
         <>
             <Box 
@@ -55,8 +37,9 @@ const PaymentDash = () => {
                         return (<div className={classes.item}>
                             <Typography className={classes.title}>{ele.name}</Typography>
                             <div className={classes.icons}>
-                            <Typography className={classes.cost}>Rs.{ele.cost}</Typography>
-                            <IconButton><CheckCircleRoundedIcon/></IconButton>
+                            <IconButton><MoneyOffIcon onClick={penalise.bind(this, ele.id)}/></IconButton>
+                            {(opentext)?<div className="reason">Open</div>:null}
+                            <IconButton><DeleteForeverIcon/></IconButton>
                             </div>
                         </div>)
                     })
