@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import styling from '../styles/componentstyle/MentorDash'
 import MoneyOffIcon from '@material-ui/icons/MoneyOff';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
+import InputBase from "@material-ui/core/InputBase";
 
 const PaymentDash = () => {
     const classes=styling();
@@ -12,7 +14,22 @@ const PaymentDash = () => {
         {
             id:1,
             name:"Mentor1",
-            cost:"200"
+        },
+        {
+            id:2,
+            name:"Mentor2",
+        },
+        {
+            id:3,
+            name:"Mentor3",
+        },
+        {
+            id:4,
+            name:"Mentor4",
+        },
+        {
+            id:5,
+            name:"Mentor5",
         },
     ]
 
@@ -38,7 +55,20 @@ const PaymentDash = () => {
                             <Typography className={classes.title}>{ele.name}</Typography>
                             <div className={classes.icons}>
                             <IconButton><MoneyOffIcon onClick={penalise.bind(this, ele.id)}/></IconButton>
-                            {(opentext)?<div className="reason">Open</div>:null}
+                            {(opentext)?
+                            <div className={classes.textareas}>
+                                <InputBase
+                                placeholder="Reason"
+                                classes={{
+                                    root: classes.inputRoot,
+                                }}
+                                inputProps={{ 'aria-label': 'search' }}
+                                />
+                                <div className={classes.submitting}>
+                                    <CheckCircleRoundedIcon/>
+                                </div>
+                        </div>
+                        :null}
                             <IconButton><DeleteForeverIcon/></IconButton>
                             </div>
                         </div>)

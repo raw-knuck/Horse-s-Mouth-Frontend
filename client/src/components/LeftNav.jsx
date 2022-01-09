@@ -25,6 +25,15 @@ const LeftNav = () => {
   const sendmentor = () =>{
     history('/mentor');
   }
+  const sendstudent = () =>{
+    history('/student');
+  }
+  const sendapplication = () =>{
+    history('/application');
+  }
+  const sendappointment = () =>{
+    history('/appointment');
+  }
   return (
     <>
       <Box 
@@ -45,15 +54,15 @@ const LeftNav = () => {
         <AccountBoxSharpIcon className={classes.icon}/>
         <Typography className={classes.navtext}>Mentors</Typography>
       </div>
-      <div className={classes.navigation}>
+      <div className={classes.navigation} onClick={sendstudent}>
         <EmojiEmotionsSharpIcon className={classes.icon}/>
         <Typography className={classes.navtext}>Student</Typography>
       </div>
-      <div className={classes.navigation}>
+      <div className={classes.navigation} onClick={sendapplication}>
         <FindInPageSharpIcon className={classes.icon}/>
         <Typography className={classes.navtext}>Applications</Typography>
       </div>
-      <div className={classes.navigation}>
+      <div className={classes.navigation} onClick={sendappointment}>
         <AccessTimeSharpIcon className={classes.icon}/>
         <Typography className={classes.navtext}>Appointments</Typography>
       </div>

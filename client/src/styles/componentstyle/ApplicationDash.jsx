@@ -1,5 +1,4 @@
 import { makeStyles } from "@material-ui/styles";
-import { alpha } from '@material-ui/core/styles';
 
 
 const useStyles=makeStyles((theme)=>({
@@ -41,11 +40,6 @@ const useStyles=makeStyles((theme)=>({
         color:theme.root.primary.light,
         fontSize:"1.5rem"
     },
-    cost:{
-        marginRight:"1rem",
-        color:theme.root.primary.light,
-        fontSize:"1.5rem"
-    },
     icons:{
         display:"flex",
         height:"100%",
@@ -56,23 +50,10 @@ const useStyles=makeStyles((theme)=>({
             color:theme.root.primary.light,
         },
     },
-    textareas:{
-        backgroundColor: alpha(theme.palette.common.white, 0.15),
-      '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-      },
-      width: '30vw',
-      height:"60%",
-      display:"flex",
-      alignItems:"center",
-      [theme.breakpoints.down('sm')]: {
-        display:"none"
-      },
-    },
-    inputRoot:{
-        width:"84%",
-        color:"#FFFFFF !important",
-        marginLeft:"16px"
+    detail:{
+        display:"flex",
+        flexDirection:"column",
+        
     }
 }))
 
