@@ -6,7 +6,7 @@ import StudentDash from '../components/ApplicationDash'
 import styling from '../styles/pagestyles/Application'
 
 
-const Payment = () => {
+const Application = () => {
     const classes=styling();
     
     return (
@@ -27,4 +27,4 @@ const Payment = () => {
     )
 }
 
-export default Payment
+export default Application

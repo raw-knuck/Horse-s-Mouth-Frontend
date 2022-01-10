@@ -4,7 +4,7 @@ import styling from '../styles/componentstyle/StudentDash'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Spinner from '../styles/spinner/Spinner.gif'
 
-const PaymentDash = () => {
+const StudentDash = () => {
     const classes=styling();
 
 
@@ -68,4 +68,4 @@ const PaymentDash = () => {
     )
 }
 
-export default PaymentDash
+export default StudentDash

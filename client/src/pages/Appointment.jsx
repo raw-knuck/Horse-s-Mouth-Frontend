@@ -6,7 +6,7 @@ import AppointmentDash from '../components/AppointmentDash'
 import styling from '../styles/pagestyles/Appointment'
 
 
-const Payment = () => {
+const Appointment = () => {
     const classes=styling();
     
     return (
@@ -27,4 +27,4 @@ const Payment = () => {
     )
 }
 
-export default Payment
+export default Appointment

@@ -4,7 +4,7 @@ import styling from "../styles/componentstyle/Dashboard";
 import Skeleton from '@material-ui/lab/Skeleton';
 import GroupTwoToneIcon from '@material-ui/icons/GroupTwoTone';
 
-const LeftNav = () => {
+const Dashboard = () => {
   //AppBar states and functions
   const classes = styling();
 
@@ -34,4 +34,4 @@ const LeftNav = () => {
   );
 };
 
-export default LeftNav;
+export default Dashboard;

@@ -7,7 +7,7 @@ import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import InputBase from "@material-ui/core/InputBase";
 import Spinner from '../styles/spinner/Spinner.gif'
 
-const PaymentDash = () => {
+const MentorDash = () => {
     const classes=styling();
 
     const [loading, setloading] = useState(true)
@@ -89,4 +89,4 @@ const PaymentDash = () => {
     )
 }
 
-export default PaymentDash
+export default MentorDash

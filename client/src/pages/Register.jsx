@@ -1,30 +1,25 @@
 import { Box } from '@material-ui/core'
 import React from 'react'
-import LeftNav from '../components/LeftNav'
-import Navbar from '../components/Navbar'
-import UniversityDash from '../components/UniversityDash'
-import styling from '../styles/pagestyles/University'
+import styling from '../styles/pagestyles/Register'
 
 
-const University = () => {
+const Register = () => {
     const classes=styling();
     
     return (
         <>
-            <Navbar/>
             <Box
                 display="flex"
                 flexDirection="row"
                 width="100vw"
-                height="90vh"
+                height="100vh"
                 className={classes.box}
                 style={{overflow:"hidden"}}
             >
-            <LeftNav/>
-            <UniversityDash/>
+            
             </Box>
         </>
     )
 }
 
-export default University
+export default Register

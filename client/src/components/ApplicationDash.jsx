@@ -4,7 +4,7 @@ import styling from '../styles/componentstyle/ApplicationDash'
 import FindInPageIcon from '@material-ui/icons/FindInPage';
 import Spinner from '../styles/spinner/Spinner.gif'
 
-const PaymentDash = () => {
+const ApplicationDash = () => {
     const classes=styling();
 
     const [name, setname] = useState("");
@@ -100,4 +100,4 @@ const PaymentDash = () => {
     )
 }
 
-export default PaymentDash
+export default ApplicationDash
