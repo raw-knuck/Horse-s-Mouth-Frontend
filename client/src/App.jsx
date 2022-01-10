@@ -7,6 +7,7 @@ import Mentor from './pages/Mentor.jsx'
 import Student from './pages/Student.jsx'
 import Application from './pages/Application.jsx'
 import Appointment from './pages/Appointment.jsx'
+import University from './pages/University.jsx'
 import theme from './styles/themes/Main'
 import { ThemeProvider } from '@material-ui/styles';
 import Firebasestate from './contexts/firebaseauth/firebasestate';
@@ -25,6 +26,7 @@ function App() {
         <Route exact path="/student" element={<Student/>}/>
         <Route exact path="/application" element={<Application/>}/>
         <Route exact path="/appointment" element={<Appointment/>}/>
+        <Route exact path="/university" element={<University/>}/>
       </Routes>
     </ThemeProvider>
     </Firebasestate>

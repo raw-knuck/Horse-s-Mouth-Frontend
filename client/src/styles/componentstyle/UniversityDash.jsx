@@ -36,7 +36,7 @@ const useStyles=makeStyles((theme)=>({
         margin:"0.5rem 0rem"
     },
     title:{
-        margin:"2rem",
+        marginLeft:"2rem",
         color:theme.root.primary.light,
         fontSize:"1.5rem"
     },
@@ -49,7 +49,6 @@ const useStyles=makeStyles((theme)=>({
             fontSize:'2.3rem',
             color:theme.root.primary.light,
         },
-        transform: "rotate(-90deg)"
     },
 }))
 

@@ -34,6 +34,9 @@ const LeftNav = () => {
   const sendappointment = () =>{
     history('/appointment');
   }
+  const senduniversity = () =>{
+    history('/university');
+  }
   return (
     <>
       <Box 
@@ -66,7 +69,7 @@ const LeftNav = () => {
         <AccessTimeSharpIcon className={classes.icon}/>
         <Typography className={classes.navtext}>Appointments</Typography>
       </div>
-      <div className={classes.navigation}>
+      <div className={classes.navigation} onClick={senduniversity}>
         <ApartmentSharpIcon className={classes.icon}/>
         <Typography className={classes.navtext}>Universities</Typography>
       </div>

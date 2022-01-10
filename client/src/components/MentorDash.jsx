@@ -5,10 +5,15 @@ import MoneyOffIcon from '@material-ui/icons/MoneyOff';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import InputBase from "@material-ui/core/InputBase";
+import Spinner from '../styles/spinner/Spinner.gif'
 
 const PaymentDash = () => {
     const classes=styling();
 
+    const [loading, setloading] = useState(true)
+    setTimeout(() => {
+        setloading(false)
+    }, 2000);
     const [opentext, setopentext] = useState(false);
     let data=[
         {
@@ -50,6 +55,8 @@ const PaymentDash = () => {
                 >
                 <div className={classes.details}>
                 {
+                    (loading)?
+                    <div style={{backgroundImage:`url(${Spinner})`,backgroundPosition: "center",position: "fixed",zIndex: 1,backgroundRepeat: "no-repeat",width: "100%",height: "100vh"}}></div>:
                     data.map((ele)=>{
                         return (<div className={classes.item}>
                             <Typography className={classes.title}>{ele.name}</Typography>

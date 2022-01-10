@@ -1,43 +1,38 @@
 import { Box, IconButton, Typography } from '@material-ui/core';
-import React,{useState} from 'react'
-import styling from '../styles/componentstyle/AppointmentDash'
-import ImportExportIcon from '@material-ui/icons/ImportExport';
+import React,{ useState } from 'react'
+import styling from '../styles/componentstyle/UniversityDash'
+import PageviewIcon from '@material-ui/icons/Pageview';
 import Spinner from '../styles/spinner/Spinner.gif'
 
-const PaymentDash = () => {
+const UniversityDash = () => {
     const classes=styling();
 
 
     let data=[
         {
             id:1,
-            student:"Student1",
-            mentor:"Mentor1"
+            name:"University1",
+            searches:50
         },
         {
             id:1,
-            student:"Student2",
-            mentor:"Mentor2"
+            name:"University2",
+            searches:100
         },
         {
             id:1,
-            student:"Student3",
-            mentor:"Mentor3"
+            name:"University3",
+            searches:30
         },
         {
             id:1,
-            student:"Student4",
-            mentor:"Mentor4"
+            name:"University4",
+            searches:200
         },
         {
             id:1,
-            student:"Student5",
-            mentor:"Mentor5"
-        },
-        {
-            id:1,
-            student:"Student6",
-            mentor:"Mentor6"
+            name:"University5",
+            searches:0
         },
     ]
 
@@ -45,6 +40,7 @@ const PaymentDash = () => {
     setTimeout(() => {
         setloading(false)
     }, 2000);
+    data.sort((a,b)=>{return b.searches-a.searches})
     return (
         <>
             <Box 
@@ -61,11 +57,11 @@ const PaymentDash = () => {
                     <div style={{backgroundImage:`url(${Spinner})`,backgroundPosition: "center",position: "fixed",zIndex: 1,backgroundRepeat: "no-repeat",width: "100%",height: "100vh"}}></div>:
                     data.map((ele)=>{
                         return (<div className={classes.item}>
-                            <Typography className={classes.title}>{ele.student}</Typography>
+                            <Typography className={classes.title}>{ele.name}</Typography>
                             <div className={classes.icons}>
-                            <IconButton><ImportExportIcon/></IconButton>
+                            <Typography className={classes.title}>{ele.searches}</Typography>
+                            <IconButton><PageviewIcon /></IconButton>
                             </div>
-                            <Typography className={classes.title}>{ele.mentor}</Typography>
                             </div>)
                     })
                 }
@@ -77,4 +73,4 @@ const PaymentDash = () => {
     )
 }
 
-export default PaymentDash
+export default UniversityDash
