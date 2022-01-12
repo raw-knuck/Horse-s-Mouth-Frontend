@@ -85,7 +85,7 @@ const Register = () => {
                 <label htmlFor="curredu" className={classes.title}> SAT SCORE (FOR BACHELOR’S DEGREES)</label>
                 <input type="text" name="curredu" className={classes.sminput} onChange={(event)=>{setlang(event.target.value)}} value={lang} required={true}/>
                 <br />
-                <Button variant="contained" className={classes.button}>Secondary</Button>
+                <Button variant="contained" className={classes.button}>Submit</Button>
             </div>
             </div>
         </>
