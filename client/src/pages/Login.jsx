@@ -24,7 +24,6 @@ const Login = () => {
         event.preventDefault();
         try {
             const val=await signInWithEmailAndPassword(authentication,email,pass)
-            localStorage.setItem("user",val.accessToken);
             // console.log(val.accessToken);
         } catch (error) {
             seterr(true)

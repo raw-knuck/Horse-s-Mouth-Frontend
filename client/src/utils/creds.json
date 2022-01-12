@@ -5,5 +5,6 @@
     "storage_bucket":"horses-mouth-decbd.appspot.com",
     "messagingsender_id":420390823563,
     "app_id":"1:420390823563:web:6ca0636f8f74503d9e568e",
-    "app_measurement_id":"G-K53SDRSMJH"
+    "app_measurement_id":"G-K53SDRSMJH",
+    "api_url":"https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production"
 }

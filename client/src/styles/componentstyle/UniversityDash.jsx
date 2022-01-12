@@ -50,6 +50,19 @@ const useStyles=makeStyles((theme)=>({
             color:theme.root.primary.light,
         },
     },
+    nouni:{
+        color:theme.root.primary.main,
+        minHeight:"80%"
+    },
+    createbutton:{
+        width:"100%",
+        display:"flex",
+        justifyContent:"flex-end",
+        '& .MuiButton-root':{
+            backgroundColor:theme.root.primary.main,
+            color:theme.root.primary.light
+        }
+    }
 }))
 
 export default useStyles

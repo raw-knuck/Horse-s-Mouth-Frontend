@@ -28,7 +28,6 @@ function App() {
         <Route exact path="/application" element={<Application/>}/>
         <Route exact path="/appointment" element={<Appointment/>}/>
         <Route exact path="/university" element={<University/>}/>
-        <Route exact path="/test" element={<MentorReg/>}/>
       </Routes>
     </ThemeProvider>
     </Firebasestate>
