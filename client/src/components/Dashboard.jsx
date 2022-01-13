@@ -14,10 +14,13 @@ const Dashboard = () => {
   const [universities, setuniversities] = useState(false)
   const [payment, setpayment] = useState(false)
 
-  setusers(false)
+  setTimeout(() => {
+    setusers(false)
   setmentors(false)
   setuniversities(false)
   setpayment(false)
+    
+  }, 2000);
 
   return (
     <>
