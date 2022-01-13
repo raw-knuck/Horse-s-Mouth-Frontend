@@ -1,9 +1,42 @@
 import { Box, Button, Checkbox, FormControlLabel, TextField, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
+import axios from 'axios'
+import React, { useState,useEffect } from 'react'
 import styling from '../styles/pagestyles/MentorReg'
+import cred from '../utils/creds.json'
+import { signOut } from "firebase/auth";
+import { authentication } from "../utils/init-firebase";
 
 
 const Register = () => {
+    const url=cred.api_url;
+    const usertoken=localStorage.getItem("token");
+    const [callfunction, setcallfunction] = useState(false)
+    
+    useEffect(()=>{
+        axios.get(`${url}/university`,{
+            headers: {
+              'Authorization': `Bearer ${usertoken}`,
+              'Content-Type': 'application/json'
+            },
+		data:{
+			curredu:curredu
+        }
+		})
+        .then(response => {
+            
+            
+    })
+    .catch(function(error)
+    {
+        if(error.response.status===401)
+          {
+              signOut(authentication).then()
+          }
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[callfunction])
+
+
     const classes=styling();
     const [curredu, setcurredu] = useState("");
     const [prevedu, setprevedu] = useState("");
@@ -15,6 +48,7 @@ const Register = () => {
     const [bio, setbio] = useState("");
     const [linkedin, setlinkedin] = useState("")
     const [checked, setchecked] = useState(false)
+    
 
     const handleChange = () =>{
         (checked)?
@@ -85,7 +119,7 @@ const Register = () => {
                 <label htmlFor="curredu" className={classes.title}> SAT SCORE (FOR BACHELOR’S DEGREES)</label>
                 <input type="text" name="curredu" className={classes.sminput} onChange={(event)=>{setlang(event.target.value)}} value={lang} required={true}/>
                 <br />
-                <Button variant="contained" className={classes.button}>Submit</Button>
+                <Button variant="contained" className={classes.button} onClick={()=>{setcallfunction(true)}}>Submit</Button>
             </div>
             </div>
         </>

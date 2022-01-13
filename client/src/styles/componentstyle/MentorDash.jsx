@@ -73,6 +73,9 @@ const useStyles=makeStyles((theme)=>({
         width:"84%",
         color:"#FFFFFF !important",
         marginLeft:"16px"
+    },
+    submitting:{
+        cursor:"pointer"
     }
 }))
 

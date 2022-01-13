@@ -50,6 +50,47 @@ const useStyles=makeStyles((theme)=>({
             color:theme.root.primary.light,
         },
     },
+    nouni:{
+        color:theme.root.primary.main,
+        minHeight:"80%"
+    },
+    createbutton:{
+        width:"100%",
+        display:"flex",
+        justifyContent:"flex-end",
+        '& .MuiButton-root':{
+            backgroundColor:theme.root.primary.main,
+            color:theme.root.primary.light
+        }
+    },
+    form:{
+        '& .MuiTextField-root': {
+            // margin: theme.spacing(7),
+            width: '90%',
+        },
+        '& .MuiButton-root':
+        {
+            // margin: theme.spacing(7),
+            width: '90%'
+        },
+        '& .MuiOutlinedInput-input':{
+            padding:theme.spacing(4.3,50),
+            [theme.breakpoints.down('sm')]:{
+                padding: theme.spacing(4.3,30)
+            },
+        },
+        padding: theme.spacing(21,16),
+        display:"flex",
+        flexDirection:"column",
+        justifyContent:"center",
+        alignItems:"center",
+        [theme.breakpoints.down('sm')]:{
+            padding: theme.spacing(0,0)
+        },
+    },
+    createuni:{
+        width:"100%"
+    }
 }))
 
 export default useStyles

@@ -1,43 +1,64 @@
-import { Box, IconButton, Typography } from '@material-ui/core';
-import React,{useState} from 'react'
+import { Box, Typography } from '@material-ui/core';
+import React,{useEffect, useState} from 'react'
 import styling from '../styles/componentstyle/StudentDash'
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Spinner from '../styles/spinner/Spinner.gif'
+import cred from '../utils/creds.json'
+import axios from 'axios';
+import { signOut } from "firebase/auth";
+import { authentication } from "../utils/init-firebase";
 
 const StudentDash = () => {
     const classes=styling();
 
-
-    let data=[
-        {
-            id:1,
-            name:"Student1",
-        },
-        {
-            id:1,
-            name:"Student2",
-        },
-        {
-            id:1,
-            name:"Student3",
-        },
-        {
-            id:1,
-            name:"Student4",
-        },
-        {
-            id:1,
-            name:"Student5",
-        },
-    ]
     const [loading, setloading] = useState(true)
-    setTimeout(() => {
-        setloading(false)
-    }, 2000);
 
-    const deactivate = (id) =>{
-        console.log(id)
-    }
+    const url=cred.api_url;
+
+    const usertoken=localStorage.getItem("token");
+
+    let [data, setdata] = useState([])
+
+    useEffect(()=>{
+        axios.get(`${url}/user`,{
+            headers: {
+              'Authorization': `Bearer ${usertoken}`,
+              'Content-Type': 'application/json'
+            }})
+        .then(response => {
+            setdata(response.data.users);
+            setloading(false)
+    })
+    .catch(function(error)
+    {
+        if(error.response.status===401)
+          {
+              signOut(authentication).then()
+          }
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
+
+    // async function getUser() {
+    //     // console.log(usertoken)
+    //     try {
+    //       const response = await axios.get(`${url}/user`,{
+    //           headers: {
+    //             'Authorization': `Bearer ${usertoken}`,
+    //             'Content-Type': 'application/json'
+    //           }
+    //       });
+    //       setdata(response.data.users);
+    //       setloading(false)
+    //     } catch (error) {
+    //       if(error.response.status===401)
+    //       {
+    //           await signOut(authentication)
+    //       }
+    //     }
+    //   }
+
+
+
     return (
         <>
             <Box 
@@ -53,10 +74,7 @@ const StudentDash = () => {
                 <div style={{backgroundImage:`url(${Spinner})`,backgroundPosition: "center",position: "fixed",zIndex: 1,backgroundRepeat: "no-repeat",width: "100%",height: "100vh"}}></div>:
                     data.map((ele)=>{
                         return (<div className={classes.item}>
-                            <Typography className={classes.title}>{ele.name}</Typography>
-                            <div className={classes.icons}>
-                            <IconButton><DeleteForeverIcon onClick={deactivate.bind(this, ele.id)}/></IconButton>
-                            </div>
+                            <Typography className={classes.title}>{ele.email}</Typography>
                             </div>)
                     })
                 }

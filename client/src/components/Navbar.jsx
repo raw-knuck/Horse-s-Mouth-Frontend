@@ -16,7 +16,6 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MenuIcon from '@material-ui/icons/Menu';
 import { Box } from '@material-ui/core';
-import { LocalHospitalTwoTone } from '@material-ui/icons';
 
 const Navbar = () => {
   
@@ -24,6 +23,8 @@ const Navbar = () => {
   const [user, setuser] = useState({})
   const [open, setopen] = useState(false)
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  console.log(user)
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
