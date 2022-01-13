@@ -12,7 +12,10 @@ const ApplicationDash = () => {
     const [wallet, setwallet] = useState(0);
     const [appointments, setappointments] = useState(0)
     const [applicationopen, setapplicationopen] = useState(true)
-
+    console.log(name)
+    console.log(university)
+    console.log(wallet)
+    console.log(appointments)
 
     
     const showapplication = (details) =>{

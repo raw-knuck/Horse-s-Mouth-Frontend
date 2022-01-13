@@ -13,6 +13,12 @@ const Dashboard = () => {
   const [mentors, setmentors] = useState(false)
   const [universities, setuniversities] = useState(false)
   const [payment, setpayment] = useState(false)
+
+  setusers(false)
+  setmentors(false)
+  setuniversities(false)
+  setpayment(false)
+
   return (
     <>
       <Box 

@@ -23,7 +23,7 @@ const Login = () => {
     const submitlogin = async(event) => {
         event.preventDefault();
         try {
-            const val=await signInWithEmailAndPassword(authentication,email,pass)
+            await signInWithEmailAndPassword(authentication,email,pass)
             // console.log(val.accessToken);
         } catch (error) {
             seterr(true)

@@ -1,7 +1,6 @@
-import { Box, IconButton, Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import React,{useEffect, useState} from 'react'
 import styling from '../styles/componentstyle/StudentDash'
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Spinner from '../styles/spinner/Spinner.gif'
 import cred from '../utils/creds.json'
 import axios from 'axios';
