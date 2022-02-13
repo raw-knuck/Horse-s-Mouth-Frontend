@@ -17,7 +17,8 @@ const useStyles=makeStyles((theme)=>({
         width:"78vw",
         height:"86vh",
         borderRadius: "10px",
-        backgroundColor:theme.root.primary.light,
+        color:"#ffffff",
+        backgroundColor:"#6e3cbc",
         justifyContent:"space-evenly",
         alignItems:"center",
         [theme.breakpoints.down('sm')]: {

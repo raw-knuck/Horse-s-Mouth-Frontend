@@ -1,7 +1,7 @@
 import { Box, Typography } from '@material-ui/core';
 import React,{useEffect, useState} from 'react'
 import styling from '../styles/componentstyle/StudentDash'
-import Spinner from '../styles/spinner/Spinner.gif'
+import Spinner from '../assets/spinner/Spinner.gif'
 import cred from '../utils/creds.json'
 import axios from 'axios';
 import { signOut } from "firebase/auth";

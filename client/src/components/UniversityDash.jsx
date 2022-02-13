@@ -2,7 +2,7 @@ import { Box, Button, IconButton, TextField, Typography } from '@material-ui/cor
 import React,{ useEffect, useState } from 'react'
 import styling from '../styles/componentstyle/UniversityDash'
 import PageviewIcon from '@material-ui/icons/Pageview';
-import Spinner from '../styles/spinner/Spinner.gif'
+import Spinner from '../assets/spinner/Spinner.gif'
 import cred from '../utils/creds.json'
 import axios from 'axios';
 import { onAuthStateChanged, signOut } from "firebase/auth";
