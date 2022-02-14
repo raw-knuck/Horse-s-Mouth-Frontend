@@ -14,6 +14,8 @@ const ApplicationDash = () => {
 
     //states
     const [loading, setloading] = useState(true)
+    const [detail, setdetail] = useState({})
+
     const [data, setdata] = useState([]);
 
     useEffect(() => {
@@ -32,6 +34,7 @@ const ApplicationDash = () => {
     const [applicationopen, setapplicationopen] = useState(true)
     
     const showapplication = (details) =>{
+        setdetail(details);
         (applicationopen)?setapplicationopen(false):setapplicationopen(true)
     }
 
@@ -61,7 +64,7 @@ const ApplicationDash = () => {
                     })
                     :
                     <div className={classes.detail}>
-                        <ApplicantDash details={{setapplicationopen}}/>
+                        <ApplicantDash details={{setapplicationopen,detail:detail}}/>
                     </div>
                 }
                 </div>

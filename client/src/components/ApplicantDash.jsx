@@ -11,13 +11,64 @@ import MailIcon from '@material-ui/icons/Mail';
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import cred from '../utils/creds.json'
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 const ApplicantDash = (props) => {
+
+  //declarations
   const classes = styling();
+  const usertoken=localStorage.getItem("token");
+  const url=cred.api_url;
+
+  //states
+  const [senddecision, setsenddecision] = useState(false)
+  const [decision, setdecision] = useState("notdecided")
+  let id="lajdlafada";
+
+  useEffect(() => {
+    if(senddecision)
+    {
+      axios.patch(`${url}/verify?action=${decision}&id=${id}`,{},
+        {
+        headers: 
+        {
+            Authorization: `Bearer ${usertoken}`
+        }})
+        .then((response) => {
+          alert("Application updated")
+          closeapplication();
+        })
+        .catch(function(error){
+          if(error.response.status===500)
+          {
+            closeapplication();
+            alert("Application don't exist")
+          }
+        })
+        }
+  }, [decision])
+  
+
+  //functions
   const closeapplication = () => {
     props.details.setapplicationopen(true);
     <ApplicationDash />;
   };
+  const openInNewTab = (url) => {
+    if (url==null)
+    {
+      return null;
+    } 
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+    if (newWindow) newWindow.opener = null
+  }
+
+
+  let sentdetail=props.details.detail;
+
   return (
     <>
       <div className="navigation"></div>
@@ -27,16 +78,16 @@ const ApplicantDash = (props) => {
                   <ChevronLeftIcon style={{backgroundColor:"#6e3cbc",color:"#ffffff",borderRadius:"30px",fontSize:"2.5rem",marginRight:"65vw"}} onClick={closeapplication}/>
               </IconButton>
               <IconButton color="primary" aria-label="linkedin id" component="span">
-                  <CancelRoundedIcon style={{fontSize:"2.5rem"}} style={{backgroundColor:"red",color:"white",borderRadius:"30px",fontSize:"2.5rem"}}/>
+                  <CancelRoundedIcon style={{fontSize:"2.5rem"}} style={{backgroundColor:"red",color:"white",borderRadius:"30px",fontSize:"2.5rem"}} onClick={()=>{setdecision("decline");setsenddecision(true);}}/>
               </IconButton>
               <IconButton color="primary" aria-label="linkedin id" component="span">
-                  <CheckCircleRoundedIcon style={{backgroundColor:"green",color:"white",borderRadius:"30px",fontSize:"2.5rem"}}/>
+                  <CheckCircleRoundedIcon style={{backgroundColor:"green",color:"white",borderRadius:"30px",fontSize:"2.5rem"}} onClick={()=>{setdecision("accept");setsenddecision(true);}}/>
               </IconButton>
         </div>
         <Avatar alt="Remy Sharp" src={profile} className={classes.avatar} />
         <div className={classes.about}>
           <Typography variant="h3" style={{ margin: "12px 20px" }}>
-            <b>Shaan Das</b>
+            <b>{(sentdetail.name)?sentdetail.name:"N/A"}</b>
           </Typography>
           <Typography variant="h6" style={{ textAlign: "center" }}>
             <cite>
@@ -47,6 +98,7 @@ const ApplicantDash = (props) => {
                 distinctio laudantium porro nobis voluptate voluptatibus velit
                 blanditiis excepturi voluptatem ab unde eos obcaecati? Nesciunt
                 sequi ut, officia ea reiciendis ipsam maiores deleniti eum quod?
+                {(sentdetail.about)?sentdetail.about:"N/A"}
               </q>
             </cite>
           </Typography>
@@ -57,7 +109,7 @@ const ApplicantDash = (props) => {
               <b>Campus Preference:</b>
             </Typography>
             <Typography variant="h6" style={{ paddingLeft: "10px" }}>
-              urban
+            urban
             </Typography>
           </div>
           <div className={classes.segments}>
@@ -65,7 +117,7 @@ const ApplicantDash = (props) => {
               <b>Status:</b>
             </Typography>
             <Typography variant="h6" style={{ paddingLeft: "10px" }}>
-              alumni
+              {(sentdetail.status)?sentdetail.status:"N/A"}
             </Typography>
           </div>
           <div className={classes.segments}>
@@ -73,7 +125,7 @@ const ApplicantDash = (props) => {
               <b>Degree:</b>
             </Typography>
             <Typography variant="h6" style={{ paddingLeft: "10px" }}>
-            bachelors
+            {(sentdetail.degree)?sentdetail.degree:"N/A"}
             </Typography>
           </div>
           <div className={classes.segments}>
@@ -81,7 +133,7 @@ const ApplicantDash = (props) => {
               <b>Major:</b>
             </Typography>
             <Typography variant="h6" style={{ paddingLeft: "10px" }}>
-            stem
+            {(sentdetail.major)?sentdetail.major:"N/A"}
             </Typography>
           </div>
           <div className={classes.segments}>
@@ -89,7 +141,7 @@ const ApplicantDash = (props) => {
               <b>GPA:</b>
             </Typography>
             <Typography variant="h6" style={{ paddingLeft: "10px" }}>
-              N/A
+              {(sentdetail.campusInfo.scores.gpa)?sentdetail.campusInfo.scores.gpa:"N/A"}
             </Typography>
           </div>
           <div className={classes.segments}>
@@ -97,7 +149,7 @@ const ApplicantDash = (props) => {
               <b>GMAT:</b>
             </Typography>
             <Typography variant="h6" style={{ paddingLeft: "10px" }}>
-              N/A
+            {(sentdetail.campusInfo.scores.gmat)?sentdetail.campusInfo.scores.gmat:"N/A"}
             </Typography>
           </div>
           <div className={classes.segments}>
@@ -105,7 +157,7 @@ const ApplicantDash = (props) => {
               <b>SAT:</b>
             </Typography>
             <Typography variant="h6" style={{ paddingLeft: "10px" }}>
-              N/A
+              {(sentdetail.campusInfo.scores.sat)?sentdetail.campusInfo.scores.sat:"N/A"}
             </Typography>
           </div>
           <div className={classes.segments}>
@@ -113,7 +165,15 @@ const ApplicantDash = (props) => {
               <b>Scholarship:</b>
             </Typography>
             <Typography variant="h6" style={{ paddingLeft: "10px" }}>
-              Yes
+            {(sentdetail.campusInfo.scholarship)?sentdetail.campusInfo.scholarship:"no"}
+            </Typography>
+          </div>
+          <div className={classes.segments}>
+            <Typography variant="h6">
+              <b>Campus Job:</b>
+            </Typography>
+            <Typography variant="h6" style={{ paddingLeft: "10px" }}>
+            {(sentdetail.campusInfo.campusJob)?sentdetail.campusInfo.campusJob:"no"}
             </Typography>
           </div>
           <div className={classes.segments}>
@@ -121,7 +181,7 @@ const ApplicantDash = (props) => {
               <b>Place of Stay:</b>
             </Typography>
             <Typography variant="h6" style={{ paddingLeft: "10px" }}>
-              ofcampus
+            {(sentdetail.campusInfo.placeOfStay)?sentdetail.campusInfo.placeOfStay:"N/A"}
             </Typography>
           </div>
         </div>
@@ -131,7 +191,7 @@ const ApplicantDash = (props) => {
               <b>Specialization:</b>
             </Typography>
             <Typography variant="h6" style={{ paddingLeft: "10px" }}>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam, totam eos veritatis dolore iure doloribus ullam laudantium nobis labore beatae.
+            {(sentdetail.campusInfo.specialisation)?sentdetail.campusInfo.specialisation:"N/A"}
             </Typography>
           </div>
         <div className={classes.segments} style={{width:"40vw",marginBottom:"5px"}}>
@@ -147,7 +207,7 @@ const ApplicantDash = (props) => {
               <b>Year of Graduation:</b>
             </Typography>
             <Typography variant="h6" style={{ paddingLeft: "10px" }}>
-              26th October 2022
+            {(sentdetail.campusInfo.yearOfGrad)?sentdetail.campusInfo.yearOfGrad:"N/A"}
             </Typography>
           </div>
         <div className={classes.segments} style={{width:"33vw",marginBottom:"5px"}}>
@@ -155,7 +215,7 @@ const ApplicantDash = (props) => {
               <b>Currency: </b>
             </Typography>
             <Typography variant="h6" style={{ paddingLeft: "10px" }}>
-            philippine peso (php)
+            {(sentdetail.preferredCurrency)?sentdetail.preferredCurrency:"N/A"}
             </Typography>
           </div>
         <div className={classes.segments} style={{width:"33vw",marginBottom:"5px"}}>
@@ -163,7 +223,7 @@ const ApplicantDash = (props) => {
               <b>Course Name: </b>
             </Typography>
             <Typography variant="h6" style={{ paddingLeft: "10px" }}>
-             bba llb
+            {(sentdetail.campusInfo.courseName)?sentdetail.campusInfo.courseName:"N/A"}
             </Typography>
           </div>
         <div className={classes.segments} style={{width:"33vw",marginBottom:"5px"}}>
@@ -171,7 +231,7 @@ const ApplicantDash = (props) => {
               <b>Country of study: </b>
             </Typography>
             <Typography variant="h6" style={{ paddingLeft: "10px" }}>
-              india
+            {(sentdetail.countryOfStudy)?sentdetail.countryOfStudy:"N/A"}
             </Typography>
           </div>
         <div className={classes.segments} style={{width:"33vw",marginBottom:"5px"}}>
@@ -179,49 +239,29 @@ const ApplicantDash = (props) => {
               <b>Country of Origin: </b>
             </Typography>
             <Typography variant="h6" style={{ paddingLeft: "10px" }}>
-              China
+            {(sentdetail.countryOfOrigin)?sentdetail.countryOfOrigin:"N/A"}
             </Typography>
           </div>
         <div className={classes.segments} style={{width:"fit-content",marginBottom:"5px"}}>
             <Typography variant="h6" style={{paddingRight:"10px"}}>
               <b>Languages:</b>
             </Typography>
-            <Typography variant="h6" className={classes.languages}>
-              Bengali
-            </Typography>
-            <Typography variant="h6" className={classes.languages}>
-              Hindi
-            </Typography>
-            <Typography variant="h6" className={classes.languages}>
-              English
-            </Typography>
-          </div>
-        <div className={classes.segments} style={{width:"fit-content",marginBottom:"5px"}}>
-            <Typography variant="h6" style={{paddingRight:"10px"}}>
-              <b>Interests:</b>
-            </Typography>
-            <Typography variant="h6" className={classes.languages}>
-            Interest1
-            </Typography>
-            <Typography variant="h6" className={classes.languages}>
-            Interest2
-            </Typography>
-            <Typography variant="h6" className={classes.languages}>
-            Interest3
-            </Typography>
+            {sentdetail.languages.map((ele) =>{
+                return <Typography variant="h6" className={classes.languages}>
+                {ele}
+              </Typography>
+            })}
           </div>
           <div className={classes.segments} style={{width:"33vw",marginBottom:"5px",alignItems:"center",padding:"0px 15px"}}>
             <Typography variant="h6">
               <b>Links: </b>
             </Typography>
-            <a href="https://linkedin.com/" target="_blank"><IconButton color="primary" aria-label="linkedin id" component="span">
+            <IconButton color="primary" aria-label="linkedin id" component="span">
                   <LinkedInIcon style={{fontSize:"2.5rem"}} className={classes.icons}/>
               </IconButton>
-            </a>
-            <a href="https://linkedin.com/" target="_blank"><IconButton color="primary" aria-label="linkedin id" component="span">
+            <IconButton color="primary" aria-label="linkedin id" component="span">
                   <DescriptionIcon style={{fontSize:"2.5rem"}} className={classes.icons}/>
               </IconButton>
-            </a>
             <a href="https://linkedin.com/" target="_blank"><IconButton color="primary" aria-label="linkedin id" component="span">
                   <FacebookIcon style={{fontSize:"2.5rem"}} className={classes.icons}/>
               </IconButton>

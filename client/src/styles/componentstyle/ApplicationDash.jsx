@@ -19,7 +19,7 @@ const useStyles=makeStyles((theme)=>({
         height:"86vh",
         borderRadius: "10px",
         color:"#ffffff",
-        backgroundColor:"#6e3cbc",
+        backgroundColor:"#ffffff",
         justifyContent:"space-evenly",
         alignItems:"center",
         [theme.breakpoints.down('sm')]: {

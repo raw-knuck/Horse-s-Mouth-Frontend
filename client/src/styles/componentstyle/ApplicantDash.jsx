@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     height: "90vh",
     flexWrap: "wrap",
     width: "100%",
+    backgroundColor:"#6e3cbc"
   },
   about: {
     display: "flex",
@@ -45,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     justifyContent: "space-evenly",
     flexWrap: "wrap",
+    backgroundColor:"#6e3cbc"
   },
   segments: {
     display: "flex",
