@@ -11,9 +11,12 @@ import MailIcon from '@material-ui/icons/Mail';
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import { authentication } from "../utils/init-firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import cred from '../utils/creds.json'
 import { useState } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const ApplicantDash = (props) => {
@@ -22,11 +25,15 @@ const ApplicantDash = (props) => {
   const classes = styling();
   const usertoken=localStorage.getItem("token");
   const url=cred.api_url;
+  const history=useNavigate();
 
   //states
   const [senddecision, setsenddecision] = useState(false)
   const [decision, setdecision] = useState("notdecided")
-  let id="lajdlafada";
+  const sentdetail=props.details.detail;
+
+  console.log(props)
+  let id=sentdetail.id;
 
   useEffect(() => {
     if(senddecision)
@@ -51,23 +58,26 @@ const ApplicantDash = (props) => {
         }
   }, [decision])
   
+  
+  onAuthStateChanged(authentication,(user) => {
+    if (!user) {
+    history("/login");
+    return null;
+    } else {
+    localStorage.setItem("token",user.accessToken);
+    // console.log(user.accessToken);
+}
+})
+  
 
   //functions
   const closeapplication = () => {
     props.details.setapplicationopen(true);
     <ApplicationDash />;
   };
-  const openInNewTab = (url) => {
-    if (url==null)
-    {
-      return null;
-    } 
-    const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
-    if (newWindow) newWindow.opener = null
+  const downloaddocument = (url) => {
+    window.location.href=url;
   }
-
-
-  let sentdetail=props.details.detail;
 
   return (
     <>
@@ -84,7 +94,7 @@ const ApplicantDash = (props) => {
                   <CheckCircleRoundedIcon style={{backgroundColor:"green",color:"white",borderRadius:"30px",fontSize:"2.5rem"}} onClick={()=>{setdecision("accept");setsenddecision(true);}}/>
               </IconButton>
         </div>
-        <Avatar alt="Remy Sharp" src={profile} className={classes.avatar} />
+        <Avatar alt="Remy Sharp" src={profile} className={classes.avatar} onClick={downloaddocument.bind(this,sentdetail.profilePic)}/>
         <div className={classes.about}>
           <Typography variant="h3" style={{ margin: "12px 20px" }}>
             <b>{(sentdetail.name)?sentdetail.name:"N/A"}</b>
@@ -92,26 +102,12 @@ const ApplicantDash = (props) => {
           <Typography variant="h6" style={{ textAlign: "center" }}>
             <cite>
               <q>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure
-                doloribus magni mollitia quae vitae tempora doloremque ipsa
-                dolor dicta et. Natus, recusandae, aliquid quam officiis,
-                distinctio laudantium porro nobis voluptate voluptatibus velit
-                blanditiis excepturi voluptatem ab unde eos obcaecati? Nesciunt
-                sequi ut, officia ea reiciendis ipsam maiores deleniti eum quod?
-                {(sentdetail.about)?sentdetail.about:"N/A"}
+                {(sentdetail?.campusInfo?.campusExperience!=="")?sentdetail?.campusInfo?.campusExperience:"N/A"}
               </q>
             </cite>
           </Typography>
         </div>
         <div className={classes.general}>
-          <div className={classes.segments}>
-            <Typography variant="h6">
-              <b>Campus Preference:</b>
-            </Typography>
-            <Typography variant="h6" style={{ paddingLeft: "10px" }}>
-            urban
-            </Typography>
-          </div>
           <div className={classes.segments}>
             <Typography variant="h6">
               <b>Status:</b>
@@ -258,18 +254,13 @@ const ApplicantDash = (props) => {
             </Typography>
             <IconButton color="primary" aria-label="linkedin id" component="span">
                   <LinkedInIcon style={{fontSize:"2.5rem"}} className={classes.icons}/>
-              </IconButton>
-            <IconButton color="primary" aria-label="linkedin id" component="span">
+            </IconButton>
+            <IconButton color="primary" aria-label="linkedin id" component="span" onClick={downloaddocument.bind(this,sentdetail.campusInfo.verificationDocUrl)}>
                   <DescriptionIcon style={{fontSize:"2.5rem"}} className={classes.icons}/>
-              </IconButton>
-            <a href="https://linkedin.com/" target="_blank"><IconButton color="primary" aria-label="linkedin id" component="span">
-                  <FacebookIcon style={{fontSize:"2.5rem"}} className={classes.icons}/>
-              </IconButton>
-            </a>
-            <a href="https://linkedin.com/" target="_blank"><IconButton color="primary" aria-label="linkedin id" component="span">
+            </IconButton >
+            <IconButton onClick={()=>{window.location.assign(`mailto:${sentdetail.campusInfo.uniEmail.email}`);}}>
                   <MailIcon style={{fontSize:"2.5rem"}} className={classes.icons}/>
-              </IconButton>
-            </a>
+            </IconButton>
           </div>
       </div>
     </>
