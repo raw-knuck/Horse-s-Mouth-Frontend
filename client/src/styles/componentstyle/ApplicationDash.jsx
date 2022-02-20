@@ -13,11 +13,13 @@ const useStyles=makeStyles((theme)=>({
     },
     details:{
         display:"flex",
+        flexDirection:"column",
         flexWrap:"wrap",
         width:"78vw",
         height:"86vh",
         borderRadius: "10px",
-        backgroundColor:theme.root.primary.light,
+        color:"#ffffff",
+        backgroundColor:"#ffffff",
         justifyContent:"space-evenly",
         alignItems:"center",
         [theme.breakpoints.down('sm')]: {

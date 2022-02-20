@@ -1,75 +1,44 @@
 import { Box, IconButton, Typography } from '@material-ui/core';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styling from '../styles/componentstyle/ApplicationDash'
+import ApplicantDash from './ApplicantDash';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
-import Spinner from '../styles/spinner/Spinner.gif'
+import Spinner from '../assets/spinner/Spinner.gif'
+import cred from '../utils/creds.json'
+import axios from 'axios';
 
 const ApplicationDash = () => {
     const classes=styling();
+    const url=cred.api_url;
+    const usertoken=localStorage.getItem("token");
 
-    const [name, setname] = useState("");
-    const [university, setuniversity] = useState("");
-    const [wallet, setwallet] = useState(0);
-    const [appointments, setappointments] = useState(0)
+    //states
+    const [loading, setloading] = useState(true)
+    const [detail, setdetail] = useState({})
+
+    const [data, setdata] = useState([]);
+
+    useEffect(() => {
+      axios.get(`${url}/verify`,{
+        headers: {
+          'Authorization': `Bearer ${usertoken}`,
+          'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+            setdata(response.data.mentors);
+            setloading(false)
+            console.log(response)
+    })
+    }, [])
     const [applicationopen, setapplicationopen] = useState(true)
-    console.log(name)
-    console.log(university)
-    console.log(wallet)
-    console.log(appointments)
-
     
     const showapplication = (details) =>{
-        setname(details.name);
-        setuniversity(details.university);
-        setwallet(details.wallet);
-        setappointments(details.appointments);
+        setdetail(details);
         (applicationopen)?setapplicationopen(false):setapplicationopen(true)
     }
-    const closeapplication = () =>{
-        (applicationopen)?setapplicationopen(false):setapplicationopen(true)
-    }
-    let data=[
-        {
-            id:1,
-            name:"Application1",
-            university:"university1",
-            wallet:12,
-            appointments:20
-        },
-        {
-            id:1,
-            name:"Application1",
-            university:"university1",
-            wallet:12,
-            appointments:20
-        },
-        {
-            id:1,
-            name:"Application1",
-            university:"university1",
-            wallet:12,
-            appointments:20
-        },
-        {
-            id:1,
-            name:"Application1",
-            university:"university1",
-            wallet:12,
-            appointments:20
-        },
-        {
-            id:1,
-            name:"Application1",
-            university:"university1",
-            wallet:12,
-            appointments:20
-        },
-    ]
 
-    const [loading, setloading] = useState(true)
-    setTimeout(() => {
-        setloading(false)
-    }, 2000);
+
     return (
         <>
             <Box 
@@ -95,7 +64,7 @@ const ApplicationDash = () => {
                     })
                     :
                     <div className={classes.detail}>
-                        <IconButton><FindInPageIcon onClick={closeapplication}/></IconButton>
+                        <ApplicantDash details={{setapplicationopen,detail:detail}}/>
                     </div>
                 }
                 </div>

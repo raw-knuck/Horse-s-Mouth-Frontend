@@ -1,13 +1,13 @@
 import { Box, IconButton, Typography } from '@material-ui/core';
-import React,{useState} from 'react'
+import React,{ useState, useEffect } from 'react'
 import styling from '../styles/componentstyle/AppointmentDash'
 import ImportExportIcon from '@material-ui/icons/ImportExport';
-import Spinner from '../styles/spinner/Spinner.gif'
+import Spinner from '../assets/spinner/Spinner.gif'
 
-const PaymentDash = () => {
+
+const AppointmentDash = () => {
+    
     const classes=styling();
-
-
     let data=[
         {
             id:1,
@@ -40,11 +40,8 @@ const PaymentDash = () => {
             mentor:"Mentor6"
         },
     ]
-
+    
     const [loading, setloading] = useState(true)
-    setTimeout(() => {
-        setloading(false)
-    }, 2000);
     return (
         <>
             <Box 
@@ -77,4 +74,4 @@ const PaymentDash = () => {
     )
 }
 
-export default PaymentDash
+export default AppointmentDash

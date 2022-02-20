@@ -5,7 +5,7 @@ import MoneyOffIcon from '@material-ui/icons/MoneyOff';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import InputBase from "@material-ui/core/InputBase";
-import Spinner from '../styles/spinner/Spinner.gif'
+import Spinner from '../assets/spinner/Spinner.gif'
 import cred from '../utils/creds.json'
 import axios from 'axios';
 import { signOut } from "firebase/auth";

@@ -2,15 +2,17 @@ import { Box, Button, IconButton, TextField, Typography } from '@material-ui/cor
 import React,{ useEffect, useState } from 'react'
 import styling from '../styles/componentstyle/UniversityDash'
 import PageviewIcon from '@material-ui/icons/Pageview';
-import Spinner from '../styles/spinner/Spinner.gif'
+import Spinner from '../assets/spinner/Spinner.gif'
 import cred from '../utils/creds.json'
 import axios from 'axios';
-import { signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { authentication } from "../utils/init-firebase";
 import { Alert } from '@material-ui/lab';
+import { useNavigate } from 'react-router-dom';
 
 const UniversityDash = () => {
     const classes=styling();
+    const history=useNavigate();
 
     const url=cred.api_url;
     const usertoken=localStorage.getItem("token");
@@ -25,6 +27,8 @@ const UniversityDash = () => {
     let [data, setdata] = useState([])
 
     useEffect(()=>{
+        if(!createuni)
+        {
         axios.get(`${url}/university`,{
             headers: {
               'Authorization': `Bearer ${usertoken}`,
@@ -45,19 +49,20 @@ const UniversityDash = () => {
               signOut(authentication).then()
           }
     })
+}
     if(createuni)
     {
     axios.post(`${url}/university`,{
-            headers: {
-              'Authorization': `Bearer ${usertoken}`,
-              'Content-Type': 'application/json'
-            },
-        data:{
             "name":uniname,
             "country":country
+        },
+        {
+        headers: 
+        {
+            Authorization: `Bearer ${usertoken}`
         }})
         .then(response => {
-            setdata(response);
+            console.log(response)
     })
     .catch(function(error)
     {
@@ -67,6 +72,16 @@ const UniversityDash = () => {
           }
     })
     }
+      //function that gets called when any change on user happens by firebase
+        onAuthStateChanged(authentication,(user) => {
+            if (!user) {
+            history("/login");
+            return null;
+            } else {
+            localStorage.setItem("token",user.accessToken);
+            // console.log(user.accessToken);
+        }
+  })
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[senduni])
 
@@ -113,7 +128,7 @@ const UniversityDash = () => {
                 >
                 <div className={classes.details}>
                 <div className={classes.createbutton}>
-                    <Button size="large" variant="contained" onClick={()=>{(createuni)?setcreateuni(false):setcreateuni(true)}}>Create</Button>
+                    <Button size="large" variant="contained" style={{margin:"30px 20px"}}onClick={()=>{(createuni)?setcreateuni(false):setcreateuni(true)}}>Create</Button>
                 </div>
                 {
                     (createuni)?
@@ -143,6 +158,7 @@ const UniversityDash = () => {
                     (loading)?
                     <div style={{backgroundImage:`url(${Spinner})`,backgroundPosition: "center",position: "fixed",zIndex: 1,backgroundRepeat: "no-repeat",width: "100%",height: "100vh"}}></div>:
                     (data===[])?
+                    <h1 className={classes.nouni}>No universities registered</h1>:
                     data.map((ele)=>{
                         return (
                         <div className={classes.item}>
@@ -152,8 +168,7 @@ const UniversityDash = () => {
                             <IconButton><PageviewIcon /></IconButton>
                             </div>
                         </div>)
-                    }):
-                    <h1 className={classes.nouni}>No universities registered</h1>
+                    })
                 }
                 </div>
                     
