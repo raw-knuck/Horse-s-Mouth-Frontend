@@ -1,5 +1,5 @@
 import { Box, IconButton, Typography } from '@material-ui/core';
-import React,{ useState, useEffect } from 'react'
+import React,{ useState } from 'react'
 import styling from '../styles/componentstyle/AppointmentDash'
 import ImportExportIcon from '@material-ui/icons/ImportExport';
 import Spinner from '../assets/spinner/Spinner.gif'
@@ -42,6 +42,7 @@ const AppointmentDash = () => {
     ]
     
     const [loading, setloading] = useState(true)
+    setloading(false)
     return (
         <>
             <Box 
