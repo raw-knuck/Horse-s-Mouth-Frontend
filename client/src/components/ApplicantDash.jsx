@@ -6,7 +6,6 @@ import ApplicationDash from "./ApplicationDash";
 import IconButton from '@material-ui/core/IconButton';
 import profile from "../assets/images/avatar.png";
 import DescriptionIcon from '@material-ui/icons/Description';
-import FacebookIcon from '@material-ui/icons/Facebook';
 import MailIcon from '@material-ui/icons/Mail';
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
@@ -56,6 +55,7 @@ const ApplicantDash = (props) => {
           }
         })
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [decision])
   
   
@@ -88,7 +88,7 @@ const ApplicantDash = (props) => {
                   <ChevronLeftIcon style={{backgroundColor:"#6e3cbc",color:"#ffffff",borderRadius:"30px",fontSize:"2.5rem",marginRight:"65vw"}} onClick={closeapplication}/>
               </IconButton>
               <IconButton color="primary" aria-label="linkedin id" component="span">
-                  <CancelRoundedIcon style={{fontSize:"2.5rem"}} style={{backgroundColor:"red",color:"white",borderRadius:"30px",fontSize:"2.5rem"}} onClick={()=>{setdecision("decline");setsenddecision(true);}}/>
+                  <CancelRoundedIcon style={{backgroundColor:"red",color:"white",borderRadius:"30px",fontSize:"2.5rem"}} onClick={()=>{setdecision("decline");setsenddecision(true);}}/>
               </IconButton>
               <IconButton color="primary" aria-label="linkedin id" component="span">
                   <CheckCircleRoundedIcon style={{backgroundColor:"green",color:"white",borderRadius:"30px",fontSize:"2.5rem"}} onClick={()=>{setdecision("accept");setsenddecision(true);}}/>
