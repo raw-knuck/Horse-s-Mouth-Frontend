@@ -101,6 +101,9 @@ const ApplicantDash = (props) => {
           </Typography>
           <Typography variant="h6" style={{ textAlign: "center" }}>
             <cite>
+            <p>
+            {sentdetail?.campusInfo?.uniName ? sentdetail.campusInfo.uniName : "University name not available"}
+            </p>
               <q>
                 {(sentdetail?.campusInfo?.campusExperience!=="")?sentdetail?.campusInfo?.campusExperience:"N/A"}
               </q>
